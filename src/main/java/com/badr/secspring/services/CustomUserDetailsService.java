@@ -1,6 +1,5 @@
 package com.badr.secspring.services;
 
-
 import com.badr.secspring.entites.AppUser;
 import com.badr.secspring.repositories.UserRepository;
 import org.springframework.security.core.userdetails.User;
@@ -11,11 +10,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = userRepository.findByEmail(username).orElseThrow(
-                () -> new UsernameNotFoundException("utilisateur non existe")
+                () -> new UsernameNotFoundException("Utilisateur introuvable")
         );
         return User.builder()
                 .username(user.getEmail())
@@ -24,4 +29,3 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .build();
     }
 }
-
