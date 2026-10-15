@@ -1,0 +1,13 @@
+package com.badr.secspring.repositories;
+
+import com.badr.secspring.entites.AppUser;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository <AppUser,UUID > {
+    Optional<AppUser> findByEmail(String email);
+
+    Boolean existsByEmail(String email);
+}

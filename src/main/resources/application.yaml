@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sec-spring
+  datasource:
+    url: jdbc:h2:mem:security-sd
+
+jwt:
+  secret: lZ+ebiWo34+BED7vEQTyFWPuVKJalLA9Lkn8jTL1Eg8=
+  expiration: 360090
